@@ -2,3 +2,15 @@
 *.synctex.gz
 *.aux
 *.log
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.run.xml
+
+
+# LaTeX compiled files
+*.pdf 
+*.ps
+*.dvi

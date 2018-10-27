@@ -1,0 +1,45 @@
+% !TeX spellcheck = en_US
+\documentclass{article}
+
+\usepackage{nlp-cproj}
+
+\usepackage{biblatex}
+\bibliography{prop}
+
+\begin{document}
+	{
+		\parindent=0pt
+		\bfseries
+		Memorial University of Newfoundland \hfill Fall Semester 2018 
+		
+		Jacob House and Noah Gallant \hfill Computer Science 4750
+		
+		\vskip 2pc
+		
+		{
+			\Large \hfill Course Project Proposal \hfill
+		}
+	}
+
+	\vskip 1pc
+
+	\paragraph{Motivation to study} computerized text summarization --- referred to by the term {\em automatic abstracting}  by those in the field --- stemmed from curiosity about the mechanisms used in an automatic abstraction PowerShell script found years ago on the Internet \cite{PSScript}. Further research has shown automatic abstraction's usefulness in many interesting fields, including but not limited to the legal and medical professions, scholarly research, and search engine result sorting and summarization.
+	
+	\smallskip
+	
+	\paragraph{Four previously-studied methods} of NLP-based automatic abstraction have been considered: nested trees, evolutionary algorithms, and graphs for evaluation and summarization, as well as basic sentence extraction.
+	
+	The nested tree structure method uses both inter-sentence and inter-word dependencies. A document is represented as a nested tree composed of both document trees, which have nodes representing sentences, and sentence trees, which have nodes for words. The relationship between sentence and word nodes is defined by this inter-sentence and inter-word dependency relationship. Performing text summarization involves trimming the tree of less important information until the desired compactness is reached. \cite{art3}
+	
+	Evolutionary algorithms (EA) encompass many techniques, however the most common of these uses algorithms to assign weights based on text features. This provides more accurate weighting of important and unimportant information. Examples of such features include assigning a score based on sentence location (e.g. awarding $1$ to the first sentence, $\frac{4}{5}$ to the second, and so on, until we reach the fifth sentence which scores $\frac{1}{5}$; remaining sentences receive a score of $0$), font style (e.g., scoring capitalized text higher), numerical content (e.g., scoring sentences with quantitative numerical information higher), and word similarity, which assigns a weight based on how often a word appears in different sentences. An EA fitness function then combines the weights to produce a complete text summarization. \cite{art1}
+	
+	Graph-based text summarization assigns each sentence a node and edges are used to connect both sentence nodes that have common words and sentences appearing next to each other in the text. The summarization is done by evaluating the nodes with the most edges as important sentences with higher fitness. \cite{art4}
+	
+	
+	
+	% Graph-Based
+	% Word Relative-Frequency Approach
+	
+%	\nocite{*}
+	\printbibliography
+\end{document}

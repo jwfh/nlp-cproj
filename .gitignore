@@ -14,3 +14,6 @@
 *.pdf 
 *.ps
 *.dvi
+
+# VS Code Workspace
+*.code-workspace

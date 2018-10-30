@@ -1,5 +1,6 @@
 # LaTeX Junk Files
 *.synctex.gz
+*.gz
 *.aux
 *.log
 *.bbl

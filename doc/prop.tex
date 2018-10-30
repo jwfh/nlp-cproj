@@ -28,11 +28,11 @@
 	
 	\paragraph{Three previously-studied methods} of NLP-based automatic abstraction have been considered: nested trees, evolutionary algorithms, and graphs for evaluation and summarization, as well as basic sentence extraction.
 	
-	The nested tree structure method uses both inter-sentence and inter-word dependencies. A document is represented as a nested tree composed of both document trees, which have nodes representing sentences, and sentence trees, which have nodes for words. The relationship between sentence and word nodes is defined by this inter-sentence and inter-word dependency relationship. Performing text summarization involves trimming the tree of less important information until the desired compactness is reached. \cite{art3}
+	The nested tree structure method uses both inter-sentence and inter-word dependencies. A document is represented as a nested tree composed of both document trees, which have nodes representing sentences, and sentence trees, which have nodes for words. The relationship between sentence and word nodes is defined by this inter-sentence and inter-word dependency relationship. Performing text summarization involves trimming the tree of less important information until the desired compactness is reached \cite{art3}.
 	
-	Evolutionary algorithms (EA) encompass many techniques, however the most common of these uses algorithms to assign weights based on text features. This provides more accurate weighting of important and unimportant information. Examples of such features include assigning a score based on sentence location (e.g. awarding $1$ to the first sentence, $\frac{4}{5}$ to the second, and so on, until we reach the fifth sentence which scores $\frac{1}{5}$; remaining sentences receive a score of $0$), font style (e.g., scoring capitalized text higher), numerical content (e.g., scoring sentences with quantitative numerical information higher), and word similarity, which assigns a weight based on how often a word appears in different sentences. An EA fitness function then combines the weights to produce a complete text summarization. \cite{art1}
+	Evolutionary algorithms (EA) encompass many techniques, however the most common of these uses algorithms to assign weights based on text features. This provides more accurate weighting of important and unimportant information. Examples of such features include assigning a score based on sentence location (e.g. awarding $1$ to the first sentence, $\frac{4}{5}$ to the second, and so on, until we reach the fifth sentence which scores $\frac{1}{5}$; remaining sentences receive a score of $0$), font style (e.g., scoring capitalized text higher), numerical content (e.g., scoring sentences with quantitative numerical information higher), and word similarity, which assigns a weight based on how often a word appears in different sentences. An EA fitness function then combines the weights to produce a complete text summarization \cite{art1}.
 	
-	Graph-based text summarization assigns each sentence a node and edges are used to connect both sentence nodes that have common words and sentences appearing next to each other in the text. The summarization is done by evaluating the nodes with the most edges as important sentences with higher fitness. \cite{art4}
+	Graph-based text summarization assigns each sentence a node and edges are used to connect both sentence nodes that have common words and sentences appearing next to each other in the text. The summarization is done by evaluating the nodes with the most edges as important sentences with higher fitness \cite{art4}.
 	
 	\paragraph{The Implementation} of this design will largely follow the graph based method outlined above. This will involve a singleton class encompassing the entire text, this singleton will contain nodes representing every sentence in the text. Each sentence node will be connected to its adjacent sentences in the text with an edge; sentence nodes that share common words will also be connected with an edge. To make the detection of similarities between sentences easier, the words from each sentence will be stored as a Trie-DFA. A summary of the text will be made by returning the sentences with the largest number of edges. The number of sentences returned for the summary will depend on the provided summary constraints. 
 	
@@ -42,9 +42,12 @@
 	
 	\paragraph{Some Concerns} with this implementation include the difficulty of duplicating the same topic, which through our research is a problem that is common, but not yet perfectly solved. This implementation also will not synthesize summary sentences; rather it only returns a subset of existing sentences, which may appear broken and unformatted.
 	
-	% Graph-Based
-	% Word Relative-Frequency Approach
+	\medskip 
 	
-%	\nocite{*}
+	{\em
+		Note that only four of the references included below have been cited in the above text. References not cited will be included in the final report and are present to demonstrate that sufficient relevant literature is available.
+	}
+	
+	\nocite{*}
 	\printbibliography
 \end{document}

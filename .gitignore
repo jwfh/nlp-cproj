@@ -17,3 +17,5 @@
 
 # VS Code Workspace
 *.code-workspace
+ 
+.DS_Store

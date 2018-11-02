@@ -9,7 +9,10 @@
 *.fdb_latexmk
 *.fls
 *.run.xml
-
+*.nav
+*.out
+*.snm
+*.toc
 
 # LaTeX compiled files
 *.pdf 

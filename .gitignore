@@ -25,5 +25,6 @@
 .DS_Store
 
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
 *$py.class

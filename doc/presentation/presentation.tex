@@ -24,16 +24,59 @@
 
 \section{Topic}
 \begin{frame}
-content...
+
 \end{frame}
 
-\section{Published Research}
-\subsection{Data Structures to Store Text}
+\section{Different Approaches}
+\subsection{Nested Tree}
 \begin{frame}
-content...
+The goal in this approach is to repeatedly trim the tree until the desired summary size is reached.
+\vskip 1pc
+\begin{tabular}{ll}
+\begin{minipage}{0.45\linewidth}
+\begin{itemize}
+	\item Tree structure is dependency based
+	\begin{itemize}
+		\item Inter-sentence
+		\item Inter-word
+	\end{itemize}
+	\vskip 1pc
+	\item Tree trimming to reduce size
+	\begin{itemize}
+		\item Removes duplicates
+		\item Removes less important nodes
+	\end{itemize}
+\end{itemize}
+\end{minipage}
+& \begin{tabular}{c}
+	\hskip -3pc\includegraphics[width=0.6\linewidth]{tree}
+	%% Make new graph
+\end{tabular}
+\end{tabular}
 \end{frame}
 
-\subsection{Parsing The Data}
+\subsection{Evolutionary Algorithm}
+\begin{frame}
+%Different candidate summarizations are made and a score each of their fitnesses is computed. Those with the highest fitness move on to create new offspring candidates which share positive traits of both parents.
+\begin{tabular}{ll}
+	\begin{minipage}{0.6\linewidth}
+		\begin{enumerate}
+			\item Assign weights to text features
+			\item Create population of distinct summaries
+			\item Assess fitness
+			\item Choose summaries with highest fitness
+			\item Create offspring from chosen summaries
+			\item Repeat steps 3--5 until the summary is concise enough
+		\end{enumerate}
+	\end{minipage}
+	& \begin{tabular}{c}
+		\includegraphics[width=0.3\linewidth]{ga}
+		%% Make new graph
+	\end{tabular}
+\end{tabular}
+
+\end{frame}
+\subsection{Graph-Based}
 \begin{frame}
 content...
 \end{frame}

@@ -1,6 +1,8 @@
 \documentclass[xcolor={usenames,dvipsnames,svgnames}]{beamer}
 
 \usetheme{mun}
+\setbeamercovered{transparent}
+\usepackage{multido}
 
 \usepackage{biblatex}
 \bibliography{\jobname}
@@ -28,6 +30,27 @@
 \end{frame}
 
 \section{Different Approaches}
+
+\subsection{Evolutionary Algorithm}
+\begin{frame}
+%Different candidate summarizations are made and a score each of their fitnesses is computed. Those with the highest fitness move on to create new offspring candidates which share positive traits of both parents.
+\begin{tabular}{ll}
+	\begin{minipage}{0.6\linewidth}
+		\begin{enumerate}
+			\item Assign weights to text features
+			\item Create population of distinct summaries
+			\item Assess fitness
+			\item Choose summaries with highest fitness
+			\item Create offspring from chosen summaries
+			\item Repeat steps 3--5 until the summary is concise enough
+		\end{enumerate}
+	\end{minipage}
+	& \begin{tabular}{c}
+		\includegraphics[width=0.3\linewidth]{ga}
+	\end{tabular}
+\end{tabular}
+\end{frame}
+
 \subsection{Nested Tree}
 \begin{frame}
 The goal in this approach is to repeatedly trim the tree until the desired summary size is reached.
@@ -50,42 +73,36 @@ The goal in this approach is to repeatedly trim the tree until the desired summa
 \end{minipage}
 & \begin{tabular}{c}
 	\hskip -3pc\includegraphics[width=0.6\linewidth]{tree}
-	%% Make new graph
 \end{tabular}
 \end{tabular}
 \end{frame}
 
-\subsection{Evolutionary Algorithm}
-\begin{frame}
-%Different candidate summarizations are made and a score each of their fitnesses is computed. Those with the highest fitness move on to create new offspring candidates which share positive traits of both parents.
-\begin{tabular}{ll}
-	\begin{minipage}{0.6\linewidth}
-		\begin{enumerate}
-			\item Assign weights to text features
-			\item Create population of distinct summaries
-			\item Assess fitness
-			\item Choose summaries with highest fitness
-			\item Create offspring from chosen summaries
-			\item Repeat steps 3--5 until the summary is concise enough
-		\end{enumerate}
-	\end{minipage}
-	& \begin{tabular}{c}
-		\includegraphics[width=0.3\linewidth]{ga}
-		%% Make new graph
-	\end{tabular}
-\end{tabular}
-
-\end{frame}
 \subsection{Graph-Based}
 \begin{frame}
-content...
+\begin{itemize}
+	\item Nodes created for each sentence
+	\vskip 6pt
+	\item Edges added between sentence nodes
+	\vskip 0pt
+	\begin{itemize}
+		\item Adjacent sentences in the text
+		\vskip 4pt
+		\item Sentences that share common words
+		\vskip 6pt
+	\end{itemize}
+	\item Edges with higher weight denote dependency
+	\vskip 6pt
+	\item Nodes (sentences) with highest total edge weight should be included in the summary
+\end{itemize}
 \end{frame}
 
-\section{Our Thoughts}
-\subsection{Data Structures}
+\section{Our Design}
+\multido{\i=1+1}{4}{%
 \begin{frame}
-content...
+	\centering
+	\includegraphics[width=.75\linewidth]{venn-\i}
 \end{frame}
+}
 
 \section{Implementation}
 \subsection{The {\tt Graph} Class}

@@ -1,5 +1,5 @@
-from PreProcessing import PreProcessor
-from Paragraph import Paragraph
+from preprocessing import PreProcessor
+from paragraph import Paragraph
 
 def main():
     print("SUMMARIZING")

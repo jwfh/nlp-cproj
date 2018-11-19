@@ -1,4 +1,4 @@
-\documentclass[xcolor={usenames,dvipsnames,svgnames}]{beamer}
+\documentclass[xcolor={usenames,dvipsnames,svgnames},handouts]{beamer}
 
 \usetheme{mun}
 \setbeamercovered{transparent}
@@ -6,6 +6,10 @@
 
 \usepackage{biblatex}
 \bibliography{\jobname}
+
+\setbeamertemplate{itemize item}{\scriptsize\raise1.25pt\hbox{\donotcoloroutermaths$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$\blacktriangleright$}}
+\setbeamertemplate{itemize subsubitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$\blacktriangleright$}}
 
 \title{Text Summarization}
 \subtitle{Computer Science 4750}
@@ -19,13 +23,15 @@
 
 \startheads
 
-\section*{Outline}
-\begin{frame}
-	\tableofcontents
-\end{frame}
-
 \section{Topic}
 \begin{frame}
+
+{\large\bfseries Text Summarization // Automatic Abstracting}
+\vskip 6pt
+The process of reducing an input text to a smaller, more concise version of itself.
+\vskip 6pt
+Use cases include: search engine results, academic research, legal contract analysis, and more advanced email inbox filtering.
+\vfill
 
 \end{frame}
 
@@ -105,19 +111,43 @@ The goal in this approach is to repeatedly trim the tree until the desired summa
 }
 
 \section{Implementation}
+\subsection{Preprocessing}
+\begin{frame}
+\begin{itemize}
+	\item Sentence separation
+	\item Deals with special/unicode characters
+\end{itemize}
+\end{frame}
 \subsection{The {\tt Graph} Class}
 \begin{frame}
-content...
+The {\tt Graph} class is a singleton which contains all the nodes and edges. It is the responsibility of this class to do the text preprocessing, and to create nodes and the edges between them.
+\begin{itemize}
+	\item Contains a list of:
+	\begin{itemize}
+		\item Nodes
+		\item Edges
+		\item Words in the text
+	\end{itemize}
+\end{itemize}
 \end{frame}
 \subsection{The {\tt Node} Class}
 \begin{frame}
-content...
+A new node object is created for every sentence in the input text. It contains the sentence, a list of words in the sentence, and a list of edges which associate it with other sentence nodes.
+\begin{itemize}
+	\item Initialized with 2 edges
+	\begin{enumerate}
+		\item Connecting the preceding sentence
+		\item Connecting the following sentence
+	\end{enumerate}
+	\item More edges are added between nodes that share a common word
+\end{itemize}
 \end{frame}
 \subsection{The {\tt Edge} Class}
 \begin{frame}
-content...
+The {\tt Edge} class contains the two nodes it is connecting, as well as the information about the connection.
+\vskip 1pc
+This information includes the words connecting the sentences, as well as if they are sentences connected by proximity.
 \end{frame}
-
 
 \section{References}
 \begin{frame}[allowframebreaks]

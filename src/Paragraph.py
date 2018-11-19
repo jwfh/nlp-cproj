@@ -1,5 +1,5 @@
-from Edge import Edge
-from Node import Node
+from edge import Edge
+from node import Node
 
 class Paragraph:
     

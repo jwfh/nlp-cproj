@@ -100,7 +100,11 @@
 
 \def\startheads{%
 	%	\CheckCommand*\beamer@checkframetitle{\@ifnextchar\bgroup\beamer@inlineframetitle{}}%
+	\let\oldhead\beamer@checkframetitle
 	\renewcommand*\beamer@checkframetitle{\global\let\beamer@frametitle\relax\@ifnextchar\bgroup\beamer@inlineframetitle{}}%
+}
+\def\nohead{%
+	\let\beamer@checkframetitle\oldhead
 }
 
 \mode

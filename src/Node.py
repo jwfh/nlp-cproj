@@ -7,6 +7,9 @@ class Node:
         self.words = self.parse(self.sentence)
         self.edges = dict()
 
+    def sentence(self):
+        return self.sentence
+
     def parse(self, sentence):
         words = sentence.split()
         print(words)
@@ -25,7 +28,7 @@ class Node:
             self.edges[edge.node[0]] = edge
 
     def returnEdgeNum(self):
-        return len(edges)
+        return len(self.edges)
 
     def returnEdges(self):
         return edges

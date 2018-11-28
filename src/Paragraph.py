@@ -18,7 +18,7 @@ class Paragraph:
 
         print(self.edges)
 
-        summary = self.retSummary(4)
+        summary = self.retSummary(6)
         for val in summary:
             print(val[0].sentence)
         
@@ -68,7 +68,7 @@ class Paragraph:
     def matchWords(self):
         
         for word in self.words:
-            if word not in self.exclude:
+            if word not in self.exclude and len(word) > 2:
                 for node1 in self.words[word]:
                     for node2 in self.words[word]:
                         if node1 != node2:

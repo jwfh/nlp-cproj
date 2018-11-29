@@ -1,0 +1,59 @@
+\ProvidesPackage{nlp-cproj}
+
+\RequirePackage{sourcecodepro}
+\RequirePackage[nf]{ebgaramond}
+\RequirePackage{geometry}
+\RequirePackage{titlesec}
+\RequirePackage{biblatex}
+
+
+\def\paragraph#1{\medskip\noindent{\scshape #1}}
+
+\long\def\institution#1{%
+	\long\def\@institution{{#1}}}
+
+\let\oldmaketitle\maketitle
+\def\maketitle{%
+	\eject
+	\thispagestyle{empty}
+	\begin{center}
+		\vglue 18pt
+		{\large\uppercase\@institution}
+		\par\vglue 84pt
+		{\LARGE\@title}
+		\par\vfill
+		{\Large\begin{tabular}{c}
+			\@author
+		\end{tabular}}
+		\par\vglue 24pt
+		{\large\@date}
+		\par\vglue 42pt
+	\end{center}
+	\eject
+}
+
+\let\oldappendix\appendix
+\def\appendix{%
+	\oldappendix
+	\eject
+	\thispagestyle{empty}
+	\bgroup\center 
+	\vglue 0.4\textheight
+	{\LARGE Appendix}\par
+	\endcenter\egroup
+	\eject
+}
+
+\def\l@section{\@dottedtocline{1}{.5em}{1.5em}}
+\def\@dotsep{4}
+\let\oldtableofcontents\tableofcontents
+\def\tableofcontents{%
+	\eject
+	\oldtableofcontents
+	\eject
+}
+
+%\def{\sectionbreak}{\cleardoublepage}
+
+
+\endinput

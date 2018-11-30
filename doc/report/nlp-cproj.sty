@@ -11,9 +11,12 @@
 
 \long\def\institution#1{%
 	\long\def\@institution{{#1}}}
+\def\course#1{%
+	\def\@course{#1}}
 
 \let\oldmaketitle\maketitle
 \def\maketitle{%
+%	\onecolumn
 	\eject
 	\thispagestyle{empty}
 	\begin{center}
@@ -21,6 +24,8 @@
 		{\large\uppercase\@institution}
 		\par\vglue 84pt
 		{\LARGE\@title}
+		\par\vskip 1pc
+		{\Large\@course}
 		\par\vfill
 		{\Large\begin{tabular}{c}
 			\@author
@@ -30,10 +35,12 @@
 		\par\vglue 42pt
 	\end{center}
 	\eject
+%	\twocolumn
 }
 
 \let\oldappendix\appendix
 \def\appendix{%
+%	\onecolumn
 	\oldappendix
 	\eject
 	\thispagestyle{empty}
@@ -42,18 +49,43 @@
 	{\LARGE Appendix}\par
 	\endcenter\egroup
 	\eject
+%	\twocolumn
 }
 
 \def\l@section{\@dottedtocline{1}{.5em}{1.5em}}
 \def\@dotsep{4}
 \let\oldtableofcontents\tableofcontents
 \def\tableofcontents{%
+%	\onecolumn
 	\eject
 	\oldtableofcontents
 	\eject
+%	\twocolumn
 }
 
-%\def{\sectionbreak}{\cleardoublepage}
+\font\tentt=cmtt12
+\hyphenchar\tentt=-1 % inhibit hyphenation in typewriter type
+\newskip\ttglue
+\tt \ttglue=.5em plus.25em minus.15em
+
+% macros for verbatim scanning
+\chardef\other=12
+\def\ttverbatim{\begingroup
+	\catcode`\\=\other
+	\catcode`\{=\other
+	\catcode`\}=\other
+	\catcode`\$=\other
+	\catcode`\&=\other
+	\catcode`\#=\other
+	\catcode`\%=\other
+	\catcode`\~=\other
+	\catcode`\_=\other
+	\catcode`\^=\other
+	\obeyspaces \obeylines \tentt}
+
+\catcode`\|=\active
+{\obeylines \gdef|{\ttverbatim \spaceskip\ttglue \let^^M=\  \let|=\endgroup}}
+
 
 
 \endinput

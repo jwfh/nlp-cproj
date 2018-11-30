@@ -6,7 +6,7 @@ import re
 
 class Paragraph:
     
-    def __init__(self, text, n):
+    def __init__(self, text):
         self.exclude = ['the']
         self.text = text
         self.nodes = list()
@@ -16,12 +16,16 @@ class Paragraph:
         self.sentences = self.preProcess(text)
         self.initializeNodes(self.sentences)
         self.words = self.findWords()
-        print("Dictionary: ", self.words)
+        #print("Dictionary: ", self.words)
         self.matchWords()
+        if len(self.sentences) > 9:
+            recommended = len(self.sentences) / 3
+        else:
+            recommended = len(self.sentences) / 2
+        
+        sumLength = int(raw_input("How many sentences would you like to include in the summary? (Recommended is " + str(recommended) + ")\n")) 
 
-        #print(self.edges)
-
-        self.summary = self.retSummary(n)
+        self.summary = self.retSummary(sumLength)
     
         self.summary.sort(key=lambda summary: summary[0].sentenceNum)
         
@@ -60,17 +64,8 @@ class Paragraph:
                     first = final_sum[1:found + 1]
                     second = [[node, size]]
                     third = final_sum[found + 1:]
-                    #print("First: ", first)
-                    #print("Second: ", second)
-                    #print("Third: ", third)
                     final_sum = first + second + third
-                    #print(final_sum)
-                #print(found)
-
-                #print("Greater")
-
-
-            #print(final_sum)
+                    
             summary = final_sum
         return summary
 
@@ -107,11 +102,9 @@ class Paragraph:
     def preProcess(self, text):
         DATA = ['.', '!', '?']
         text = text.decode('utf-8')
+        text = text.replace('\r\n', ' ')
         processed = re.split(r"[\.|!|\?]+", text)
         
-        for line in range(len(processed)):
-            processed[line] = processed[line].replace('\r\n', ' ')
-            
         processed = [x.encode('ascii', 'ignore') for x in processed]
         #print "Processed: ", processed
 

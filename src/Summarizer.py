@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from Paragraph import Paragraph
+from Text import Text
 import os
 
 def main():
@@ -11,10 +11,10 @@ def main():
     fileid = int(raw_input("Please specify a test file number:\n"))
     filename = './texts/' + tests[fileid]
 
-    with open(filename, 'r') as text:
-        paragraph = Paragraph(text.read())
+    with open(filename, 'r') as textfile:
+        text = Text(textfile.read())
 
-        for val in paragraph.summary:
+        for val in text.summary:
             print "\n-", val[0].sentence.strip()
 
 if __name__ == "__main__":

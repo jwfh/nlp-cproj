@@ -1,6 +1,6 @@
 % !TeX spellcheck = en_US
 
-The implementation chosen consisted primarily of the graph method. Three Python classes were chosen to implement this approach: the |Node|, the |Edge|, and the |Text| class. Combined, these are called by a Python program |Summarizer.py| which has the role of opening the input text file and ensuring the correct format is used before performing the summarization.
+The implementation chosen consisted primarily of the graph method. Three Python classes were written to implement this approach: the |Node|, the |Edge|, and the |Text| class. These are called by a Python program |Summarizer.py| which has the role of opening the input text file and ensuring the correct format is used before performing the summarization.
 
 \subsection{Design}
 
@@ -8,12 +8,12 @@ The implementation chosen consisted primarily of the graph method. Three Python 
 
 \subsection{Program Structure}
 	\subsubsection{The Text Class}
-	The role of the |Text| class is to perform all operations on the text. This includes any pre-processing required, the initial object creation, determining further relations, as well as using the determined relationship information to form a reasonably accurate and concise summary.
+	The role of the |Text| class is to perform all operations on the text. This includes any pre-processing required, the initial object creation, determining inter-sentence relationships, as well as using the determined relationship information to form a reasonably accurate and concise summary.
 	
-	When first initializing the text, the text to be summarized must be passed into the constructor of the |Text| class. This text is then saved as an object variable for future use, and proceeds to undergo pre-processing. Pre-processing is done by the |preProcessing()| method, and is tasked with splitting the text into sentences.
+	When first initializing the text, the text to be summarized must be passed into the constructor of the |Text| class. This text is then saved as in instance variable for future use, and proceeds to undergo pre-processing. Pre-processing is done by the |preProcessing()| method, and is tasked with splitting the text into sentences.
 	
 	\paragraph{preProcessing()}
-		Pre-processing is a crucial step in achieving a high quality summary. Since this is the first modification made to the text, the method in which pre-processing is conducted can have a significant bearing on the quality of the summary. The goal of the pre-processing in this application is primarily to split the text into sentences. This is done by considering all sentence terminating symbols including `.', `!', and `?'. This also considers if a sentence contains a quote, and any other situation in which a terminating symbol should be ignored.
+		Pre-processing is a crucial step in achieving a high quality summary. Since this \edit{What is ``this''? What modification is being made? This is not clear.} is the first modification made to the text, the method in which pre-processing is conducted can have a significant bearing on the quality of the summary. The goal of the pre-processing in this application is primarily to split the text into sentences. This is done by considering all sentence terminating symbols including `.', `!', and `?'. This also considers if a sentence contains a quote, and any other situation in which a terminating symbol should be ignored.
 		
 		The secondary operation of the pre-processing in our application is to replace special Unicode characters with their plain text equivalent. Many common text editors use Unicode characters as opposed to the plain text characters for many text symbols. Some of these symbols include quotation marks, accents, en dashes and em dashes.
 		

@@ -28,15 +28,15 @@ class Paragraph:
         self.summary = self.retSummary(sumLength)
     
         self.summary.sort(key=lambda summary: summary[0].sentenceNum)
-        
+
 
     #
     #   retSummary(sumLength)
     #
     #       sumLength: The number of sentences to include in the final summary.
     #
-    #   This function will use all the nodes and edges in the graph to determine which sentences have the most relations. 
-    #   It does this by first looping through all the nodes in the Text object, and by calling the returnEdgeNum() method 
+    #   This function will use all the nodes and edges in the graph to determine which sentences have the most relations.
+    #   It does this by first looping through all the nodes in the Text object, and by calling the returnEdgeNum() method
     #   to determine how many relations each sentence has.
     #   The program will then sort the nodes in descending order, and will return the sentences with the most relations.
     #   The number of sentences returned, and therefore the length of the summary is determined by the sumLength variable.
@@ -45,7 +45,7 @@ class Paragraph:
         summary = list()
         final_sum = []
         for node in self.nodes:
-            
+
             size = node.returnEdgeNum()
             #print("Size: ", [node, size])
             if len(final_sum) < sumLength:
@@ -58,8 +58,8 @@ class Paragraph:
                     #print(final_sum[i])
                     if size >= final_sum[i][1]:
                         found = i
-                    
-                
+
+
                 if found != -1:
                     first = final_sum[1:found + 1]
                     second = [[node, size]]
@@ -69,11 +69,11 @@ class Paragraph:
             summary = final_sum
         return summary
 
-                        
+
         print("Summary: ", summary)
 
     def matchWords(self):
-        
+
         for word in self.words:
             if word not in self.exclude and len(word) > 2:
                 for node1 in self.words[word]:
@@ -87,7 +87,7 @@ class Paragraph:
 
     def findWords(self):
         words = dict()
-        
+
         for node in self.nodes:
             #print(node)
             for word in node.findWords():
@@ -103,13 +103,12 @@ class Paragraph:
         DATA = ['.', '!', '?']
         text = text.decode('utf-8')
         text = text.replace('\r\n', ' ')
-        processed = re.split(r"[\.|!|\?]+", text)
-        
+        processed = re.split(r"([\.|!|\?] )+", text)
         processed = [x.encode('ascii', 'ignore') for x in processed]
         #print "Processed: ", processed
 
         return processed
-        
+
     def initializeNodes(self, sentences):
 
         def addNode(sentences, previousNode, num):
@@ -118,7 +117,7 @@ class Paragraph:
             #print(sentences)
             node1 = previousNode
             node2 = Node(sentences, num)
-            
+
             edge = Edge(node1, node2)
             #print("Edge: ", edge)
 
@@ -127,9 +126,9 @@ class Paragraph:
 
             #self.nodes.append(node1)
             self.nodes.append(node2)
-            
+
             self.edges.append(edge)
-        
+
         node1 = Node(sentences[0], 0)
         self.nodes.append(node1)
         i = 1
@@ -137,4 +136,4 @@ class Paragraph:
 
             addNode(sentences[i], self.nodes[-1], i)
 
-            i += 1  
+            i += 1

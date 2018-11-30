@@ -1,12 +1,13 @@
+% !TeX spellcheck = en_US
 
-The implementation chosen mainly followed the graph method. Three primary files were created containing the three main classes of the software. These classes were the node, the edge, and the paragraph class. Combined together these are called by a summarizer Python file which has the role of opening the summary file and ensuring the correct format is used before performing the summarization.
+The implementation chosen consisted primarily of the graph method. Three Python classes were chosen to implement this approach: the |Node|, the |Edge|, and the |Text| class. Combined, these are called by a Python program |Summarizer.py| which has the role of opening the input text file and ensuring the correct format is used before performing the summarization.
 
 \subsection{Design}
 
 
 
-\subsection{Classes}
-	\subsubsection{Text Class}
+\subsection{Program Structure}
+	\subsubsection{The Text Class}
 	The role of the |Text| class is to perform all operations on the text. This includes any pre-processing required, the initial object creation, determining further relations, as well as using the determined relationship information to form a reasonably accurate and concise summary.
 	
 	When first initializing the text, the text to be summarized must be passed into the constructor of the |Text| class. This text is then saved as an object variable for future use, and proceeds to undergo pre-processing. Pre-processing is done by the |preProcessing()| method, and is tasked with splitting the text into sentences.

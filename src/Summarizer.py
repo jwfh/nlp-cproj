@@ -1,12 +1,11 @@
 #!/usr/bin/env python
-from PreProcessing import PreProcessor
-from Paragraph import Paragraph
+from Text import Text
 
 def main():
     print("SUMMARIZING")
 
-    with open('test2.txt', 'r') as text:
-        paragraph = Paragraph(text.read())
+    with open('sample-data/shoelaces.txt', 'r') as textfile:
+        text = Text(textfile.read())
 
 if __name__ == "__main__":
     main() 

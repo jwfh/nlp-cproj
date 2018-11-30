@@ -4,7 +4,7 @@ from nltk.stem import WordNetLemmatizer
 import re
 
 
-class Paragraph:
+class Text:
     
     def __init__(self, text):
         self.exclude = ['the']

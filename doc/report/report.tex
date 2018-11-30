@@ -1,0 +1,47 @@
+\documentclass[12pt]{article}
+
+\usepackage{nlp-cproj}
+\usepackage{setspace}
+
+\geometry{
+	margin=1.5in, 
+	letterpaper
+}
+
+\bibliography{\jobname}
+
+\title{Text Summarization}
+\institution{
+	Memorial University of Newfoundland\par 
+	Faculty of Science\par
+	Department of Computer Science\par
+} 
+\course{Computer Science 4750}
+\author{Jacob House \and Noah Gallant}
+\date{Friday, November 30\textsuperscript{th}, 2018}
+
+\raggedbottom
+
+\begin{document}
+	\maketitle
+	\tableofcontents 
+	
+	\setstretch{1.5}
+	\section{Topic and Motivation}
+	\input{topic}
+	
+	\section{Background Research}
+	\input{background}
+	
+	\section{Implementation and Program Structure}
+	\input{implementation}
+	
+	\section{Optimization}
+	\input{optimization}
+	
+	\printbibliography
+	\appendix
+	\section{Demonstration}
+	\input{demo}
+	
+\end{document}

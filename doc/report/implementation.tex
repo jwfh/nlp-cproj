@@ -1,0 +1,50 @@
+% !TeX spellcheck = en_US
+
+The implementation chosen consisted primarily of the graph method. Three Python classes were written to implement this approach: the |Node|, the |Edge|, and the |Text| class. These are called by a Python program |Summarizer.py| which has the role of opening the input text file and ensuring the correct format is used before performing the summarization.
+
+
+\subsection{The {\tt Text} Class}
+	The role of the |Text| class is to perform all operations on the text. This includes any pre-processing required, the initial object creation, determining inter-sentence relationships, as well as using the determined relationship information to form a reasonably accurate and concise summary.
+	
+	When first initializing the text, the text to be summarized must be passed into the constructor of the |Text| class. This text is then saved as in instance variable for future use, and proceeds to undergo pre-processing. Pre-processing is done by the |preProcessing()| method, and is tasked with splitting the text into sentences.
+	
+	\subsubsection{The {\tt preProcessing()} Method}
+		Pre-processing is a crucial step in achieving a high quality summary. Since pre-processing is the first operation performed on the text, the method in which pre-processing is conducted can have a significant bearing on the quality of the summary. The goal of the pre-processing in this application is primarily to split the text into sentences. This is done by considering sentence terminating symbols including `.', `!', and `?'. This also considers if a sentence contains a quote, and any other situation in which a terminating symbol should be ignored.
+		
+		The secondary operation of the pre-processing in our application is to replace special Unicode characters with their plain text equivalent, or, in extreme edge cases, to simply remove the character. Many common text editors use Unicode characters as opposed to the plain text characters for many text symbols. Some of these symbols include typographer's quotation marks, accents (\eg \c c, \"a, \~n, etc.), en dashes and em dashes, as well as non-Latin characters (\eg \o, \ae, \ss, etc.). 
+		
+	\paragraph{Operating on Split Sentences}
+		% Using the nodes to find the summary
+		Once split, the text is processed by creating a |Node| object for each sentence. This node contains the original sentence, a list of all the words in the sentence which have been passed through a lemmatizer \cite{nltk}, a list of edges which are connected to the node, as well as the sentence number to keep track of the location of the sentence in the original text. During the |Text()| constructor which parses the sentence, |Edge| objects are created to connect sentences that are adjacent to each other in the original text. These adjacency edges are the first edges to be created in the graph.
+	
+	\subsubsection{Creating the Dictionary}
+		After all the sentence nodes have been created, and a list of words in each sentence node has been processed, the instance of |Text| will then proceed to loop through each sentence node to create a complete dictionary of all the words found in the text. This dictionary will not only store the available words, but will also store all the sentence nodes in which the word is contained. The goal of creating this dictionary is to decrease the computational complexity in determining the relationships between sentences. 
+		
+	\subsubsection{Creating Edges}
+		By creating a dictionary that contains words and the nodes they are contained within, it then suffices to loop through all the words (\ie dictionary keys) and, when a word is contained within more than one node, to link these nodes with an edge. Each sentence |Node| object will thus contain both proximity |Edge|s and |Edge|s associated with common words.
+		
+		This step also offers the opportunity for further improvement to the summary. The more relation edges that are made, using different criteria, the better the summary. Therefore by only counting the number of word relations, we limit the quality of our summary. Some additional criteria to be added to improve the summary include quotation detection, statistics, names, negations, and modifiers. Of course, this means creating a hybrid graph-and-text-element approach in which sentences accumulate weight (\ie their importance score) from inter-sentence content relationships as well as in-sentence text elements that do not associate one sentence with another.
+		
+	\subsubsection{Creating a Summary}
+		The next step is to create a summary using the nodes and edges created in the previous steps. After this processing is complete, the software prompts the user to input how many sentences the summary should contain and supplies a recommended number of sentences to choose in case the user is not completely aware of the length of the text supplied. This recommendation $R$ is computed using Equation~\eqref{word-rec}, where $N$ is the total number of sentences in the text.
+		\begin{equation}
+		R := \begin{casescentered}
+		\dfrac{1}{2} \cdot N, & \textbf{if $N < 10$} \\[6pt]
+		\dfrac{1}{3} \cdot N, & \textbf{if $N \geqslant 10$}.
+		\end{casescentered}
+		\label{word-rec}
+		\end{equation}
+		Then, the $R$ highest-ranking |Node| objects are sorted according to their associated sentence's position in the original text and the stored sentences are printed in bullet-point format. 
+	
+\subsection{Node Class}
+	The |Node| class is the application's representation of a sentence. The |Node()| constructor takes in a sentence as a string, and will immediately split the string into words which are then saved in a list. 
+		
+	To reduce the time complexity of the execution, instead of performing lemmatization in the pre-processing stage as might be expected, it was decided to perform this step at the same time the words in the sentence were being divided. This was chosen to prevent accessing a word more than was required.
+		
+	The final task of the |preProcessing()| \edit{Wait\ldots we're still talking about |preProcessing()|? I thought we were in the |Node| class now.} method is to use a lemmatizer to remove word endings. When comparing words later in the application to determine relevant sentences, this will improve the results as it will more accurately represent similar words, rather than counting the same words with identical endings as different words and therefore misrepresenting the relations in the text.
+		
+	
+\subsection{Edge Class}
+	
+	
+	

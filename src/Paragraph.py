@@ -102,8 +102,8 @@ class Paragraph:
     def preProcess(self, text):
         DATA = ['.', '!', '?']
         text = text.decode('utf-8')
-        text = text.replace('\r\n', ' ')
-        processed = re.split(r"([\.|!|\?] )+", text)
+        text = text.replace('\r\n', ' ').replace('\n', ' ')
+        processed = re.split(r"(?:[\.!\?]\s)+", text)
         processed = [x.encode('ascii', 'ignore') for x in processed]
         #print "Processed: ", processed
 

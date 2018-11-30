@@ -5,15 +5,52 @@
 \RequirePackage{geometry}
 \RequirePackage{titlesec}
 \RequirePackage{biblatex}
+\RequirePackage{verbatim}
 \RequirePackage{xcolor}
+\RequirePackage{amsmath, amssymb}
+
+\font\ttentt=cmtt10
+\font\tentt=cmtt12
+\hyphenchar\tentt=-1 % inhibit hyphenation in typewriter type
+\newskip\ttglue
+\tt \ttglue=.5em plus.25em minus.15em
 
 \def\edit#1{\bgroup\color{red} [#1]\egroup}
-\def\paragraph#1{\medskip\noindent{\scshape #1}}
+\def\paragraph#1{\par\medskip\noindent{\scshape #1}\par}
 
 \long\def\institution#1{%
 	\long\def\@institution{{#1}}}
 \def\course#1{%
 	\def\@course{#1}}
+
+% redefine \VerbatimInput
+%\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
+%{fontsize=\footnotesize,
+%	%
+%	frame=lines,  % top and bottom rule only
+%	framesep=2em, % separation between frame and text
+%	rulecolor=\color{gray},
+%	%
+%	label=\fbox{\color{black}},
+%	labelposition=topline,
+%	%
+%	commandchars=\|\(\), % escape character and argument delimiters for
+%	% commands within the verbatim
+%	commentchar=*        % comment characte
+%}
+
+\def\textfile#1#2{\par\bigskip\bgroup\parindent=0pt\hrulefill\,\,\fbox{#1}\,\,\hrulefill\par\begin{quote}\input{#2}\end{quote}\par\rule[1.25pc]{\linewidth}{1pt}\par\egroup}
+
+\def\eg{\bgroup\em e.g.,\egroup\ }
+\def\ie{\bgroup\em i.e.,\egroup\ }
+\def\cf{\bgroup\em c.f.,\egroup\ }
+
+\newenvironment{casescentered}
+{\let\@ifnextchar\new@ifnextchar
+	\left\lbrace
+	\def\arraystretch{1.2}%
+	\array{@{}c@{\quad}l@{}}}
+{\endarray\right.}
 
 \let\oldmaketitle\maketitle
 \def\maketitle{%
@@ -63,11 +100,6 @@
 	\eject
 %	\twocolumn
 }
-
-\font\tentt=cmtt12
-\hyphenchar\tentt=-1 % inhibit hyphenation in typewriter type
-\newskip\ttglue
-\tt \ttglue=.5em plus.25em minus.15em
 
 % macros for verbatim scanning
 \chardef\other=12

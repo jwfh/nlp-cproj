@@ -16,7 +16,7 @@ class Paragraph:
         self.sentences = self.preProcess(text)
         self.initializeNodes(self.sentences)
         self.words = self.findWords()
-        #print("Dictionary: ", self.words)
+        
         self.matchWords()
         if len(self.sentences) > 9:
             recommended = len(self.sentences) / 3

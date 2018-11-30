@@ -13,9 +13,9 @@ def main():
 
     with open(filename, 'r') as text:
         paragraph = Paragraph(text.read())
-        
+
         for val in paragraph.summary:
-            print "\t-", val[0].sentence.strip()
+            print "\n-", val[0].sentence.strip()
 
 if __name__ == "__main__":
-    main() 
+    main()

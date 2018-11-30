@@ -20,13 +20,21 @@ The implementation chosen consisted primarily of the graph method. Three Python 
 	\paragraph{Processing Sentences}
 		% Using the nodes to find the summary
 		
-		Once the pre-processing is complete
+		Pre-processing removes special characters and splits the text into individual sentence. Once split, each text is processed by creating a node object for each sentence. This node contains the original sentence, a list of all the words in a sentence which have been passed through a lemmatizer, a list of edges which are connected to the node, as well as the sentence number to keep track of the location of the sentence in the original text. While each sentence |Node| object is being created, edge objects are being created to connect each node whose sentences are connected in the text. These adjacency edges are the first edges to be created in the graph.
 	
 	\paragraph{Creating the Dictionary}
 	
 		After all the sentence nodes have been created, and a list of words in each sentence node has been processed, The |Text| object will then proceed to loop through each sentence node to create a complete dictionary of all the words found in the text. This dictionary will not only store the available words, but will also store all the sentence node in which the word is contained in. The goal of creating this dictionary is to decrease the complexity in creating the relations between sentences. By creating a dictionary which contains words and the nodes they are contained within, we must simply loop through all the words and create relations when a word is contained within more than 1 node.
 		
-	\paragraph{}
+	\paragraph{Creating Edges}
+	
+		Using the now created dictionary of words, we proceeded to loop through each word individually, creating an edge between each of the sentence |Node| objects which have common words. Each sentence |Node| object will thus contain both proximity |Edge| objects, and |Edge| objects associated with common words.
+		
+		This step also offers the opportunity for further improvement to the summary. The more relation edges that are made, using different criteria, the better the summary. Therefore by only counting the number of word relations, we limit the quality of our summary. Some additional criteria to be added to improve the summary include quote detection, statistics, Names, Negations, and Modifiers.
+		
+	\paragraph{Creating a Summary}
+	
+		The next step is to create a summary using the nodes and edges created in the previous steps. To create the summary, we use an input value which 
 	
 	\subsubsection{Node Class}
 	

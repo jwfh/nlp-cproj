@@ -18,10 +18,10 @@ class Node:
         wordnet_lemmatizer = WordNetLemmatizer()
 
         for index in range(len(words)):
-            print(words[index])
+            #print(words[index])
             words[index] = wordnet_lemmatizer.lemmatize(words[index], pos='v').encode("utf-8")
 
-        print(words)
+        #print(words)
         return words
 
     def findWords(self):

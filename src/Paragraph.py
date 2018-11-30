@@ -1,6 +1,8 @@
 from Edge import Edge
 from Node import Node
+from nltk.stem import WordNetLemmatizer
 import re
+
 
 class Paragraph:
     
@@ -9,7 +11,11 @@ class Paragraph:
         self.text = text
         self.nodes = list()
         self.edges = list()
+
+        # Creates a node for every sentence in the text
         self.sentences = self.preProcess(text)
+
+        # 
         self.initializeNodes(self.sentences)
 
         self.words = self.findWords()
@@ -19,12 +25,24 @@ class Paragraph:
         print(self.edges)
 
         summary = self.retSummary(6)
+    
+        summary.sort(key=lambda summary: summary[0].sentenceNum)
+
         for val in summary:
-            print(val[0].sentence)
+            print(val[0].sentenceNum, val[0].sentence)
         
 
-        #for node in self.nodes:
-
+    #
+    #   retSummary(sumLength)
+    #
+    #       sumLength: The number of sentences to include in the final summary.
+    #
+    #   This function will use all the nodes and edges in the graph to determine which sentences have the most relations. 
+    #   It does this by first looping through all the nodes in the Text object, and by calling the returnEdgeNum() method 
+    #   to determine how many relations each sentence has.
+    #   The program will then sort the nodes in descending order, and will return the sentences with the most relations.
+    #   The number of sentences returned, and therefore the length of the summary is determined by the sumLength variable.
+    #
     def retSummary(self, sumLength):
         summary = list()
         final_sum = []
@@ -97,12 +115,12 @@ class Paragraph:
         
     def initializeNodes(self, sentences):
 
-        def addNode(sentences, previousNode):
+        def addNode(sentences, previousNode, num):
             if sentences == "":
                 return
             print(sentences)
             node1 = previousNode
-            node2 = Node(sentences)
+            node2 = Node(sentences, num)
             
             edge = Edge(node1, node2)
             print("Edge: ", edge)
@@ -115,11 +133,11 @@ class Paragraph:
             
             self.edges.append(edge)
         
-        node1 = Node(sentences[0])
+        node1 = Node(sentences[0], 0)
         self.nodes.append(node1)
         i = 1
         while i < len(sentences) - 1:
 
-            addNode(sentences[i], self.nodes[-1])
+            addNode(sentences[i], self.nodes[-1], i)
 
             i += 1  

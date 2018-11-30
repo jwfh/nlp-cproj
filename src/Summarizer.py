@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from PreProcessing import PreProcessor
 from Paragraph import Paragraph
 import os
 

@@ -6,7 +6,7 @@ import re
 
 class Paragraph:
     
-    def __init__(self, text):
+    def __init__(self, text, n):
         self.exclude = ['the']
         self.text = text
         self.nodes = list()
@@ -14,22 +14,16 @@ class Paragraph:
 
         # Creates a node for every sentence in the text
         self.sentences = self.preProcess(text)
-
-        # 
         self.initializeNodes(self.sentences)
-
         self.words = self.findWords()
-
+        print("Dictionary: ", self.words)
         self.matchWords()
 
-        print(self.edges)
+        #print(self.edges)
 
-        summary = self.retSummary(6)
+        self.summary = self.retSummary(n)
     
-        summary.sort(key=lambda summary: summary[0].sentenceNum)
-
-        for val in summary:
-            print(val[0].sentenceNum, val[0].sentence)
+        self.summary.sort(key=lambda summary: summary[0].sentenceNum)
         
 
     #
@@ -49,7 +43,7 @@ class Paragraph:
         for node in self.nodes:
             
             size = node.returnEdgeNum()
-            print("Size: ", [node, size])
+            #print("Size: ", [node, size])
             if len(final_sum) < sumLength:
                 final_sum.append([node, size])
                 final_sum.sort()
@@ -57,7 +51,7 @@ class Paragraph:
             elif len(final_sum) >= sumLength:
                 found = -1
                 for i in range(len(final_sum)):
-                    print(final_sum[i])
+                    #print(final_sum[i])
                     if size >= final_sum[i][1]:
                         found = i
                     
@@ -66,17 +60,17 @@ class Paragraph:
                     first = final_sum[1:found + 1]
                     second = [[node, size]]
                     third = final_sum[found + 1:]
-                    print("First: ", first)
-                    print("Second: ", second)
-                    print("Third: ", third)
+                    #print("First: ", first)
+                    #print("Second: ", second)
+                    #print("Third: ", third)
                     final_sum = first + second + third
-                    print(final_sum)
-                print(found)
+                    #print(final_sum)
+                #print(found)
 
-                print("Greater")
+                #print("Greater")
 
 
-            print(final_sum)
+            #print(final_sum)
             summary = final_sum
         return summary
 
@@ -98,32 +92,42 @@ class Paragraph:
 
     def findWords(self):
         words = dict()
-
+        
         for node in self.nodes:
-            print(node)
+            #print(node)
             for word in node.findWords():
-                if word.lower() in words:
-                    words[word.lower()].append(node)
+                safeword = re.sub(r'^["(]|[")]$', '', word.lower())
+                if safeword in words:
+                    words[safeword].append(node)
                 else:
-                    words[word.lower()] = [node]
+                    words[safeword] = [node]
 
         return words
 
     def preProcess(self, text):
         DATA = ['.', '!', '?']
-        return re.split(r"[\.|!|\?]+", text)
+        text = text.decode('utf-8')
+        processed = re.split(r"[\.|!|\?]+", text)
+        
+        for line in range(len(processed)):
+            processed[line] = processed[line].replace('\r\n', ' ')
+            
+        processed = [x.encode('ascii', 'ignore') for x in processed]
+        #print "Processed: ", processed
+
+        return processed
         
     def initializeNodes(self, sentences):
 
         def addNode(sentences, previousNode, num):
             if sentences == "":
                 return
-            print(sentences)
+            #print(sentences)
             node1 = previousNode
             node2 = Node(sentences, num)
             
             edge = Edge(node1, node2)
-            print("Edge: ", edge)
+            #print("Edge: ", edge)
 
             node1.addEdge(edge)
             node2.addEdge(edge)

@@ -5,7 +5,7 @@ import re
 
 
 class Paragraph:
-    
+
     def __init__(self, text):
         self.exclude = ['the']
         self.text = text
@@ -22,11 +22,11 @@ class Paragraph:
             recommended = len(self.sentences) / 3
         else:
             recommended = len(self.sentences) / 2
-        
-        sumLength = int(raw_input("How many sentences would you like to include in the summary? (Recommended is " + str(recommended) + ")\n")) 
+
+        sumLength = int(raw_input("How many sentences would you like to include in the summary? (Recommended is " + str(recommended) + ")\n"))
 
         self.summary = self.retSummary(sumLength)
-    
+
         self.summary.sort(key=lambda summary: summary[0].sentenceNum)
 
 
@@ -65,7 +65,7 @@ class Paragraph:
                     second = [[node, size]]
                     third = final_sum[found + 1:]
                     final_sum = first + second + third
-                    
+
             summary = final_sum
         return summary
 
@@ -102,8 +102,8 @@ class Paragraph:
     def preProcess(self, text):
         DATA = ['.', '!', '?']
         text = text.decode('utf-8')
-        text = text.replace('\r\n', ' ')
-        processed = re.split(r"([\.|!|\?] )+", text)
+        text = text.replace('\r\n', ' ').replace('\n', ' ')
+        processed = re.split(r"(?:[\.!\?]\s)+", text)
         processed = [x.encode('ascii', 'ignore') for x in processed]
         #print "Processed: ", processed
 

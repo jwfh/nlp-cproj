@@ -1,0 +1,17 @@
+
+Automatic abstracting can be done using various techniques in both strong and weak NLP. In this report we focus on three techniques, all using strong NLP. All the techniques discussed rely on some amount of text prepocessing, which involves preparing the text to be in an appropriate format to perform the summarization. Pre-pocessing of text to prepare for text summarization can be done in fine detail, or can simply involve splitting the text into sentences. The higher the level of detail applied to the pre-processing, the more likely the algorithm will provide valuable results.
+
+
+\subsection{Nested Tree}
+
+	\paragraph{The Nested Tree} automated abstracting technique focuses on finding and classifying inter-sentence and inter-word dependencies. The first step to this algorithm, is to divide the text into sentences, adding a node to the tree for every sentence. The edge connecting the sentence nodes in the tree represents the dependy between the two sentence nodes. Nodes connected by edges are adjacent sentences, and the type of dependency between the nodes is what is held in the edge. The words are similar. Each sentence is split into words which are each stored in a node. These nodes are each stored in a tree within each sentence node. In each word tree, the dependency between the words is held in the edge between the two dependent word nodes. Therefore when understanding the tree, it is important to node that the dependency between word nodes forms the meaning and the dependency between sentence nodes, which essentially determines the meaning of the entire sentence. When forming edges, there are many different types of dependencies, each of which can be classified as either a core sentence attribute, or a dependency attribute which adds additional meaning or value to a core sentence. To form the summary, we start from the lowest branches in the tree, and we begin trimming. When performing the tree trimming to obtain our summary, we first trim the sentences whose dependency trees indicate that they add meaning to the value. Core dependencies are the sentence nodes to be trimmed last as they are the core meaning of the sentence and are therefore an important sentence to the summary. This method will form a concise summary by continuously trimming the tree until we reach the desired summary length. it's important to note that this summary method allows us to trim the summary to any length we chose. The disadvantage of this, is that too short of summaries, may be concise, but are likely to also lack important information to the sentence, resulting in an incomplete and therefore innacurate summary of the text. 
+
+
+\subsection{ Evolutionary Algorithm}
+
+	\paragraph{The evolutionary algorithm} approach to automated abstraction is a more complicated approach in comparison to the nested tree method. This method also requires more time and computational power.
+
+
+\subsection{Graphs}
+
+	\paragraph{Graph Based} automated abstraction techniques are similar to the tree method. First the text to summarize is broken down into individual sentences. These sentences are then placed into nodes which are initially connected by edges representing the adjacency of sentences in the text. Once all the nodes have been added to the tree. The missing edges representing other criteria within the sentence are added, these criteria can range from the type of sentence, to shared or similar words. 

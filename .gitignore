@@ -29,3 +29,5 @@ __pycache__/
 *.pyo
 *.pyd
 *$py.class
+
+doc/report/report\.pdf

@@ -23,23 +23,7 @@
 \def\course#1{%
 	\def\@course{#1}}
 
-% redefine \VerbatimInput
-%\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
-%{fontsize=\footnotesize,
-%	%
-%	frame=lines,  % top and bottom rule only
-%	framesep=2em, % separation between frame and text
-%	rulecolor=\color{gray},
-%	%
-%	label=\fbox{\color{black}},
-%	labelposition=topline,
-%	%
-%	commandchars=\|\(\), % escape character and argument delimiters for
-%	% commands within the verbatim
-%	commentchar=*        % comment characte
-%}
-
-\def\textfile#1#2{\par\bigskip\bgroup\parindent=0pt\hrulefill\,\,\fbox{#1}\,\,\hrulefill\par\begin{quote}\input{#2}\end{quote}\par\rule[1.25pc]{\linewidth}{1pt}\par\egroup}
+\def\textfile#1#2{\par\bigskip\bgroup\parindent=0pt\hrulefill\,\,\fbox{#1}\,\,\hrulefill\par\begin{quote}\setstretch{1}\input{#2}\end{quote}\par\rule[1.25pc]{\linewidth}{1pt}\par\egroup}
 
 \def\eg{\bgroup\em e.g.,\egroup\ }
 \def\ie{\bgroup\em i.e.,\egroup\ }

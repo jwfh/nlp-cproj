@@ -1,3 +1,4 @@
+% !TeX TS-program = 
 % !TeX spellcheck = en_US
 
 The implementation chosen consisted primarily of the graph method. Three Python classes were written to implement this approach: the |Node|, the |Edge|, and the |Text| class. These are called by a Python program |Summarizer.py| which has the role of opening the input text file and ensuring the correct format is used before performing the summarization.
@@ -37,26 +38,26 @@ The implementation chosen consisted primarily of the graph method. Three Python 
 		Then, the $R$ highest-ranking |Node| objects are sorted according to their associated sentence's position in the original text and the stored sentences are printed in bullet-point format. 
 	
 \subsection{Node Class}
-	The |Node| class is the application's representation of a sentence. The |Node()| constructor takes in a sentence as a string, and will immediately split the string into words which are saved individualy in a list. 
+	The |Node| class is the application's representation of a sentence. The |Node()| constructor takes in a sentence as a string, and will immediately split the string into words which are saved individually in a list. 
 		
-	Despite no-longer in the |preProcessing()| stage, the final step in pre-processing is conducted in the constructor of the |Node| object. Each |Node| object first accepts a sentence as a string, which is split into individual words. Before storing the individual words in a list, they are lemmatized so as to improve the quality of the summarization, and ensure that the same words with different endings, still result in creating a dependency between two sentences. This is performed during the access of each word to reduce the time complexity of the |preProcessing()| function, and of the overall application. 
+	Despite no longer being in the pre-processing stage, the final step in pre-processing is conducted in the constructor of the |Node| object. Each |Node| object first accepts a sentence as a string, which is split into individual words. Before storing the individual words in a list, they are lemmatized so as to improve the quality of the summarization, and ensure that the same words with different endings, still result in creating a dependency between two sentences. This is performed during the access of each word to reduce the time complexity of the |preProcessing()| function, and of the overall application. 
 	
-	\paragraph{parse(sentence)}
-	This function takes a string argument called sentence which is the sentence the |Node| object is representing. |parse()| then takes the sentence and splits it into individual words. These words are then passed through a lemmatizer using the nltk library to remove the endings of words eg. ing, er. Once passed through the lemmatizer, the lemmatized words are added to a list which is returned by the function.
+	\subsubsection{The {\tt parse(sentence)} Method}
+	This method takes a string argument called |sentence| which is the sentence the |Node| object is representing. |parse()| then takes the sentence and splits it into individual words. These words are then passed through a lemmatizer using the NLTK library to remove the endings of words, \eg\ -ing, -er, -ed, etc. Once passed through the lemmatizer, the lemmatized words are added to a list which is returned by the function.
 		
-	\paragraph{findWords()}
+	\subsubsection{The {\tt findWords()} Method}
 	The |findWords()| function simply finds and returns all the words in the sentence as a list. As the words are parsed and stored in lists by the constructor, this function simply returns that list, and doesn't perform any additional modifications to the |Node| object.
 	
-	\paragraph{addEdge(edge)}	
+	\subsubsection{The {\tt addEdge(edge)} Method}	
 	Each |Node| object contains a list of both the words in the sentence, and a list of all the edges with which the |Node| is associated. This function simply adds the passed in |Edge| object to the list of edges held in the |Node|.
 	
-	\paragraph{The returnEdgeNum()}
-	function simply returns the number of edges associated with the current |Node| object.
+	\subsubsection{The {\tt returnEdgeNum()} Method}
+	The |returnEdge()| method simply returns the number of edges associated with the current |Node| object.
 	
-	\paragraph{The returnEdges()}
-	function simply returns the list of |Edge|s held in the |Node| object. This includes both the adjacency edges added in the |Node| constructor, as well as edges which share common characterstics such as sharing the same word.
+	\subsubsection{The {\tt returnEdges()} Method}
+	The |returnEdges()| method simply returns the list of |Edge|s held in the |Node| object. This includes both the adjacency edges added in the |Node| constructor, as well as edges which share common characteristics such as sharing the same word.
 		
 \subsection{Edge Class}
 	
-	The |Edge| class is very simplistic and only contains a constructor and a single object variable. The edge class connects two nodes which share a dependency. For this reason, the single object variable called node, simply holds a tuple of the two nodes the |Edge| is connecting. Edge object are also stored in the |Text| class, and the node class and are cruacial to forming the summary.
+	The |Edge| class is very simplistic and only contains a constructor and a single object variable. The edge class connects two nodes which share a dependency. For this reason, the single object variable called node, simply holds a tuple of the two nodes the |Edge| is connecting. Edge object are also stored in the |Text| class, and the node class and are crucial to forming the summary.
 	

@@ -1,7 +1,7 @@
 % !TeX TS-program = 
 % !TeX spellcheck = en_US
 
-The implementation chosen consisted primarily of the graph method. Three Python classes were written to implement this approach: the |Node|, the |Edge|, and the |Text| class. These are called by a Python program |Summarizer.py| which has the role of opening the input text file and ensuring the correct format is used before performing the summarization.
+The graph-based approach was chosen for our design. Three Python classes were written to implement this approach: the |Node|, the |Edge|, and the |Text| class. These are called by a Python program |Summarizer.py| which has the role of opening the input text file and ensuring the correct format is used before performing the summarization.
 
 
 \subsection{The {\tt Text} Class}
@@ -49,10 +49,10 @@ The implementation chosen consisted primarily of the graph method. Three Python 
 	The |findWords()| method finds and returns all the words in the sentence as a list. As the words are already parsed and stored in lists by the constructor, this function simply returns that list, and doesn't perform any additional modifications to the |Node| object.
 	
 	\subsubsection{The {\tt addEdge(edge)} Method}	
-	Each |Node| object contains a list of both the words in the sentence, and a list of all the edges with which the |Node| is associated. This function adds the passed in |Edge| object to the list of edges held in the |Node|.
+	Each |Node| object contains a list of the words in the sentence, and a list of all the edges with which the |Node| is associated. This function adds the passed in |Edge| object to the list of edges held in the |Node|.
 	
 	\subsubsection{The {\tt returnEdgeNum()} Method}
-	The |returnEdge()| method returns the number of edges associated with the current |Node| object.
+	The |returnEdge()| method returns the number of edges associated with the current |Node| object (\ie the length of the edge list).
 	
 	\subsubsection{The {\tt returnEdges()} Method}
 	The |returnEdges()| method returns the list of |Edge|s held in the |Node| object. This includes both the adjacency edges added in the |Text| constructor, as well as edges which represent common characteristics such as sharing the same word.

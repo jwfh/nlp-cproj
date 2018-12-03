@@ -1,4 +1,4 @@
-\subsection{Heterogeneous Computing}
+\subsection{Heterogeneous Computing}\label{sec:het}
 One test case was to give the application an except (included below) of a research paper on heterogeneous computing \cite{noahpaper}.
 \textfile{Heterogeneous Computing Test File}{HeterogeneousComputing.txt}
 For this file we requested that the application return five sentences. The sentences returned were:
@@ -9,7 +9,8 @@ For this file we requested that the application return five sentences. The sente
 	\item This creates two different classifications; a latency compute unit (LUT) being a general CPU, and a throughput compute unit being a general GPU.
 	\item CPUs are composed of a few large, flexible, and fast clocked cores, while GPUs are built using thousands of cores that are both smaller and slower, but are highly parallelized.
 \end{enumerate}
-\edit{Reflect on this summary here.}
+
+We think that this summary is fairly accurate. It effectively retrieves important sentences from the sample text that define hetergeneous computing and explain why computing on a CPU is different than on a GPU in terms of throughput and the structure of the two types of processing units.
 
 \subsection{Harry Potter}
 The next test case being demonstrated is the use of the software with an excerpt from the first chapter from J.K. Rowling's {\em Harry Potter and the Order of the Phoenix} \cite{harrypotter}.
@@ -48,3 +49,10 @@ With this text file as the input, the software recommended a summary of 15 sente
 	
 	\item But before he could draw himself up to full height, the top of his head collided with the Dursleys' open window, and the resultant crash made Aunt Petunia scream even louder.
 \end{enumerate}
+
+This summary is not as good as the one demonstrated in Section~\ref{sec:het}. This text, being the first chapter of a children's book, contains a great deal of description and plot-filling information, and consequently does not explain a single idea. Instead there are many ideas being discussed and the summarizer fragmented these thoughts even more. 
+
+This is not to say that the summary is useless; it does mostly make sense to read. Rather it pales mainly in sentence~5 --- where the reader is left to wonder who {\em she} is --- and in sentences~10 and 11 --- in which the detail was omitted that Harry was listening for information on the Muggle news about catastrophes that could be fallout from larger, more serious events occurring in the magical world.
+
+Interestingly, the summarizer has chosen to include sentences~2 and 3, which discuss Harry hiding in the flower bed below the living room window, and then mention him hitting his head on the window in sentence~15. In this sense, one can argue that despite the summary being in bullet-point form, and having fragmented the meaning of the text by picking a set of not necessarily consecutive sentences from the original text, the use of identical words in multiple sentences to tie together meaning appears to be quite effective in maintaining coherence.
+

@@ -5,12 +5,12 @@ The implementation chosen consisted primarily of the graph method. Three Python 
 
 
 \subsection{The {\tt Text} Class}
-	The role of the |Text| class is to perform all operations on the text. This includes any pre-processing required, the initial object creation, determining inter-sentence relationships, as well as using the determined relationship information to form a reasonably accurate and concise summary.
+	The role of the |Text| class is to perform all operations on the text. This includes any pre-processing required, the initial object creation, determination of inter-sentence relationships, as well as using the determined relationship information to form a reasonably accurate and concise summary.
 	
-	When first initializing the text, the text to be summarized must be passed into the constructor of the |Text| class. This text is then saved as in instance variable for future use, and proceeds to undergo pre-processing. Pre-processing is done by the |preProcessing()| method, and is tasked with splitting the text into sentences.
+	When first initializing the text, the text to be summarized must be passed into the constructor of the |Text| class. This text is then saved as in instance variable for future use, and undergoes pre-processing. Pre-processing is done by the |preProcessing()| method, and is tasked with splitting the text into sentences.
 	
 	\subsubsection{The {\tt preProcessing()} Method}
-		Pre-processing is a crucial step in achieving a high quality summary. Since pre-processing is the first operation performed on the text, the method in which pre-processing is conducted can have a significant bearing on the quality of the summary. The goal of the pre-processing in this application is primarily to split the text into sentences. This is done by considering sentence terminating symbols including `.', `!', and `?'. This also considers if a sentence contains a quote, and any other situation in which a terminating symbol should be ignored.
+		Pre-processing is a crucial step in achieving a high quality summary. Since pre-processing is the first operation performed on the text, the method in which pre-processing is conducted can have a significant bearing on the quality of the summary. The goal of the pre-processing in this application is primarily to split the text into sentences. This is done by considering sentence terminating symbols including `.', `!', and `?'. The algorithm also considers if a sentence contains a quotation, and other situations in which a terminating symbol should be ignored.
 		
 		The secondary operation of the pre-processing in our application is to replace special Unicode characters with their plain text equivalent, or, in extreme edge cases, to simply remove the character. Many common text editors use Unicode characters as opposed to the plain text characters for many text symbols. Some of these symbols include typographer's quotation marks, accents (\eg \c c, \"a, \~n, etc.), en dashes and em dashes, as well as non-Latin characters (\eg \o, \ae, \ss, etc.). 
 		
@@ -22,7 +22,7 @@ The implementation chosen consisted primarily of the graph method. Three Python 
 		After all the sentence nodes have been created, and a list of words in each sentence node has been processed, the instance of |Text| will then proceed to loop through each sentence node to create a complete dictionary of all the words found in the text. This dictionary will not only store the available words, but will also store all the sentence nodes in which the word is contained. The goal of creating this dictionary is to decrease the computational complexity in determining the relationships between sentences. 
 		
 	\subsubsection{Creating Edges}
-		By creating a dictionary that contains words and the nodes they are contained within, it then suffices to loop through all the words (\ie dictionary keys) and, when a word is contained within more than one node, to link these nodes with an edge. Each sentence |Node| object will thus contain both proximity |Edge|s and |Edge|s associated with common words.
+		By creating a dictionary that contains words and the nodes they are contained within, it then suffices to loop through all the words (\ie dictionary keys) and, when a word is contained within more than one node, to link these nodes with an edge. Each |Node| object will thus contain both proximity |Edge|s and |Edge|s associated with common words.
 		
 		This step also offers the opportunity for further improvement to the summary. The more relation edges that are made, using different criteria, the better the summary. Therefore by only counting the number of word relations, we limit the quality of our summary. Some additional criteria to be added to improve the summary include quotation detection, statistics, names, negations, and modifiers. Of course, this means creating a hybrid graph-and-text-element approach in which sentences accumulate weight (\ie their importance score) from inter-sentence content relationships as well as in-sentence text elements that do not associate one sentence with another.
 		
@@ -40,25 +40,23 @@ The implementation chosen consisted primarily of the graph method. Three Python 
 \subsection{Node Class}
 	The |Node| class is the application's representation of a sentence. The |Node()| constructor takes in a sentence as a string, and will immediately split the string into words which are saved individually in a list. 
 		
-	Despite no longer being in the pre-processing stage, the final step in pre-processing is conducted in the constructor of the |Node| object. Each |Node| object first accepts a sentence as a string, which is split into individual words. Before storing the individual words in a list, they are lemmatized so as to improve the quality of the summarization, and ensure that the same words with different endings, still result in creating a dependency between two sentences. This is performed during the access of each word to reduce the time complexity of the |preProcessing()| function, and of the overall application. 
+	Despite no longer being in the pre-processing stage, the final step in pre-processing is conducted in the constructor of the |Node| object. Each |Node| object first accepts a sentence as a string, which is split into individual words. Before storing the individual words in a list, they are lemmatized to improve the quality of the summarization and ensure that the same words with different endings still result in creating a dependency between two sentences. This is performed during the access of each word to reduce the time complexity of the |preProcessing()| function, and of the overall application. 
 	
 	\subsubsection{The {\tt parse(sentence)} Method}
 	This method takes a string argument called |sentence| which is the sentence the |Node| object is representing. |parse()| then takes the sentence and splits it into individual words. These words are then passed through a lemmatizer using the NLTK library to remove the endings of words, \eg\ -ing, -er, -ed, etc. Once passed through the lemmatizer, the lemmatized words are added to a list which is returned by the function.
 		
 	\subsubsection{The {\tt findWords()} Method}
-	The |findWords()| function simply finds and returns all the words in the sentence as a list. As the words are parsed and stored in lists by the constructor, this function simply returns that list, and doesn't perform any additional modifications to the |Node| object.
+	The |findWords()| method finds and returns all the words in the sentence as a list. As the words are already parsed and stored in lists by the constructor, this function simply returns that list, and doesn't perform any additional modifications to the |Node| object.
 	
 	\subsubsection{The {\tt addEdge(edge)} Method}	
-	Each |Node| object contains a list of both the words in the sentence, and a list of all the edges with which the |Node| is associated. This function simply adds the passed in |Edge| object to the list of edges held in the |Node|.
+	Each |Node| object contains a list of both the words in the sentence, and a list of all the edges with which the |Node| is associated. This function adds the passed in |Edge| object to the list of edges held in the |Node|.
 	
 	\subsubsection{The {\tt returnEdgeNum()} Method}
-	The |returnEdge()| method simply returns the number of edges associated with the current |Node| object.
+	The |returnEdge()| method returns the number of edges associated with the current |Node| object.
 	
 	\subsubsection{The {\tt returnEdges()} Method}
-	The |returnEdges()| method simply returns the list of |Edge|s held in the |Node| object. This includes both the adjacency edges added in the |Node| constructor, as well as edges which share common characteristics such as sharing the same word.
+	The |returnEdges()| method returns the list of |Edge|s held in the |Node| object. This includes both the adjacency edges added in the |Text| constructor, as well as edges which represent common characteristics such as sharing the same word.
 		
 \subsection{Edge Class}
 	
-	The |Edge| class is very simplistic and only contains a constructor and a single object variable. The edge class connects two nodes which share a dependency. For this reason, the single object variable called node, simply holds a tuple of the two nodes the |Edge| is connecting. Edge object are also stored in the |Text| class, and the node class and are crucial to forming the summary.
-
-	
+	The |Edge| class is very simplistic and only contains a constructor and a single object variable. The |Edge| class connects two nodes which share a dependency. For this reason, the single object variable called |node|, simply holds a tuple of the two nodes the |Edge| is connecting. Instances of the |Edge| class are stored in both the |Node| and |Text| classes and are crucial to forming the summary.
